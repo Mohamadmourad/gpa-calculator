@@ -86,6 +86,10 @@ header{
     margin-top: 50px;
 }
 
+.gradeList{
+    margin-bottom: 30px;
+}
+
 .list{
     display: flex;
     flex-direction: column;
