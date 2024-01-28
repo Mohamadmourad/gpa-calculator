@@ -143,5 +143,8 @@ function putAll(){
 }
 
 window.onload = function() {
+    if(localStorage.getItem("grades") == null){
+        localStorage.setItem("grades", JSON.stringify(gpa));
+    }
     putAll();
   };
