@@ -65,6 +65,13 @@ header{
     color: #2D3250;
 }
 
+.gpaHolder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 .gpa{
     display: flex;
     align-items: center;
@@ -73,6 +80,9 @@ header{
     height: 100px;
     color: #F6B17A;
     margin-top: 40px;
+    border-bottom: solid;
+    padding-bottom: 50px;
+    width: 80%;
 }
 
 .gpa p{
@@ -83,11 +93,11 @@ header{
 .gradeList h1{
     margin-left: 10px;
     color: #F6B17A;
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 .gradeList{
-    margin-bottom: 30px;
+    padding-bottom: 60px;
 }
 
 .list{
