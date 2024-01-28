@@ -5,7 +5,7 @@ if(courseName == '' || grade == ''){
     alert('Please fill out all the fields');
     return;
 }
-if(grade > 4 || grade < 0){
+if(grade > 100 || grade < 0){
     alert('Please enter a valid grade between 0 and 4');
     return;
 }
@@ -14,6 +14,8 @@ if(courseName in gpa){
     alert('Course already exists');
     return;
 }
+
+grade = gradeConverter(grade);
 
 let item = document.createElement('div');
 item.className = 'item';
@@ -73,6 +75,27 @@ function calculateGPA(){
       }
     let GPA = total/Object.keys(gpa).length;
     document.getElementById('gpa').innerHTML = Math.floor(GPA * 100) / 100;
+}
+
+function gradeConverter(grade){
+    if(grade <= 4){
+     return grade;
+    }
+    else if(grade <= 100 && grade >= 90){
+        return 4;
+    }
+    else if(grade <= 89 && grade >= 80){
+       return 3 + grade % 10 / 10;
+    }
+    else if(grade <= 79 && grade >= 70){
+        return 2 + grade % 10 / 10;
+     }
+     else if(grade <= 69 && grade >= 60){
+        return 1 + grade % 10 / 10;
+     }
+    else{
+        return 0;
+    }
 }
 
 function letterCacl(grade){
