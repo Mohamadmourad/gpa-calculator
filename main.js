@@ -17,50 +17,13 @@ if(courseName in gpa){
 
 grade = gradeConverter(grade);
 
-let item = document.createElement('div');
-item.className = 'item';
-item.classList.add('item');
-
-document.getElementById('list').appendChild(item);
-
-
-let textpart = document.createElement('div');
-textpart.className = 'textpart';
-item.appendChild(textpart);
-let buttons = document.createElement('div');
-buttons.className = 'buttons';
-item.appendChild(buttons);
-
-let course = document.createElement('p');
-course.className = 'courseName';
-course.innerText = courseName;
-textpart.appendChild(course);
-
-let gradePart = document.createElement('p');
-gradePart.className = 'grade';
-gradePart.innerText = grade;
-textpart.appendChild(gradePart);
-
-let letter = document.createElement('p');
-letter.className = 'letter';
-letter.innerText = letterCacl(grade);
-textpart.appendChild(letter);
-
-let deleteButton = document.createElement("button");
-deleteButton.className = "deleteButton";
-deleteButton.innerText = "Delete";
-deleteButton.onclick = function() {
-    item.remove();
-    textpart.remove();
-    deleteButton.remove();
-    delete gpa[courseName];
-    calculateGPA();
-};
-
-buttons.appendChild(deleteButton);
+divCreation(courseName,grade);
 
 gpa[courseName]= grade;
 calculateGPA();
+
+localStorage.setItem("grades", JSON.stringify(gpa));
+console.log(localStorage.getItem("grades"));
 });
 
 let gpa = {};
@@ -124,3 +87,61 @@ else{
     return 'F';
 }
 }
+
+function divCreation(courseName,grade){
+    let item = document.createElement('div');
+    item.className = 'item';
+    item.classList.add('item');
+    
+    document.getElementById('list').appendChild(item);
+    
+    
+    let textpart = document.createElement('div');
+    textpart.className = 'textpart';
+    item.appendChild(textpart);
+    let buttons = document.createElement('div');
+    buttons.className = 'buttons';
+    item.appendChild(buttons);
+    
+    let course = document.createElement('p');
+    course.className = 'courseName';
+    course.innerText = courseName;
+    textpart.appendChild(course);
+    
+    let gradePart = document.createElement('p');
+    gradePart.className = 'grade';
+    gradePart.innerText = grade;
+    textpart.appendChild(gradePart);
+    
+    let letter = document.createElement('p');
+    letter.className = 'letter';
+    letter.innerText = letterCacl(grade);
+    textpart.appendChild(letter);
+    
+    let deleteButton = document.createElement("button");
+    deleteButton.className = "deleteButton";
+    deleteButton.innerText = "Delete";
+    deleteButton.onclick = function() {
+        item.remove();
+        textpart.remove();
+        deleteButton.remove();
+        delete gpa[courseName];
+        calculateGPA();
+        localStorage.setItem("grades", JSON.stringify(gpa));
+    };
+    
+    buttons.appendChild(deleteButton);
+}
+
+function putAll(){
+    let grades = JSON.parse(localStorage.getItem("grades"));
+    for (let key in grades) {
+        divCreation(key,grades[key]);
+      }
+      gpa = grades;
+      calculateGPA();
+}
+
+window.onload = function() {
+    putAll();
+  };
