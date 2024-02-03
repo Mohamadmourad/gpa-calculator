@@ -29,14 +29,24 @@ console.log(localStorage.getItem("grades"));
 let gpa = {};
 function calculateGPA(){
     let total = 0;
+    let singleCredit = 0;
+    let threeCredit = 0;
     for (let key in gpa) {
-        total += parseFloat(gpa[key]);
+        if(key.includes(" lab") || key.includes(" Lab")){
+            singleCredit++; 
+            total += parseFloat(gpa[key]);
+        }
+        else{
+            threeCredit++;
+            total += parseFloat(gpa[key] *3);
+        }
+                
       }
       if(Object.keys(gpa).length == 0){
           document.getElementById('gpa').innerHTML = 0.00;
           return;
       }
-    let GPA = total/Object.keys(gpa).length;
+    let GPA = total/(singleCredit + threeCredit * 3);
     document.getElementById('gpa').innerHTML = Math.floor(GPA * 100) / 100;
 }
 

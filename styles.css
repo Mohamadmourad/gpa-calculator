@@ -126,6 +126,7 @@ header{
     color: #F7454A;
     font-weight: bold;
     font-size: 20px;
+    cursor: pointer;
 }
 
 .buttons{
